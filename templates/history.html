@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page">
+  <h1>📚 Study History</h1>
+
+  {% if sessions %}
+    <div class="history-grid">
+      {% for s in sessions %}
+      <div class="history-card">
+        <h3>Session #{{ s['id'] }}</h3>
+        <p><strong>Date:</strong> {{ s['created_at'] }}</p>
+        <p><strong>Score:</strong> {{ s['score'] }}/{{ s['total'] }} ({{ s['percentage'] }}%)</p>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No sessions saved yet. Complete a quiz to start tracking progress.</p>
+  {% endif %}
+</div>
+{% endblock %}

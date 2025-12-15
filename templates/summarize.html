@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>Smart Summarizer</h1>
+  <p>Paste your notes, pick a style, and get an AI-generated summary.</p>
+</div>
+
+<div class="two-column">
+  <div class="card">
+    <h3>Input</h3>
+    <textarea id="inputText" rows="14" placeholder="Paste your study notes or article text here..."></textarea>
+
+    <div class="mode-row">
+      <span>Summary style:</span>
+      <label><input type="radio" name="mode" value="paragraph" checked> Paragraph</label>
+      <label><input type="radio" name="mode" value="bullets"> Bullets</label>
+      <label><input type="radio" name="mode" value="outline"> Outline</label>
+    </div>
+
+    <button class="btn primary" onclick="generateSummary()">✨ Generate Summary</button>
+  </div>
+
+  <div class="card">
+    <h3>AI Summary</h3>
+    <div id="summaryOutput" class="summary-box">Your summary will appear here.</div>
+    <button id="toQuizBtn" class="btn secondary" style="display:none;" onclick="goToQuiz()">→ Continue to Quiz Lab</button>
+  </div>
+</div>
+{% endblock %}

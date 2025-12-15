@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page">
+  <h1>📊 Learning Feedback</h1>
+
+  {% if stats %}
+    <h2>{{ stats.score }}/{{ stats.total }} ({{ stats.percentage }}%)</h2>
+    <p class="subtitle">Your performance in the latest AI quiz.</p>
+
+    <canvas id="scoreChart" height="120"></canvas>
+    <canvas id="perQuestionChart" height="160" style="margin-top:30px;"></canvas>
+
+    {% if stats.weak_areas %}
+      <h3 style="margin-top:24px;">Focus on these topics:</h3>
+      <ul>
+        {% for w in stats.weak_areas %}
+        <li>{{ w }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <button onclick="window.location.href='{{ url_for('summarize_page') }}'">
+      🔁 New Notes
+    </button>
+  {% else %}
+    <p>No stats yet. Take a quiz first.</p>
+  {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Build stats object directly from template variables
+  const score = {{ stats.score if stats else 0 }};
+  const total = {{ stats.total if stats else 0 }};
+  const perQuestion = [
+    {% if stats and stats.per_question %}
+      {% for v in stats.per_question %}
+        {{ v }}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    {% endif %}
+  ];
+
+  if (total > 0) {
+    const ctx1 = document.getElementById('scoreChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['Correct', 'Incorrect'],
+        datasets: [{
+          data: [score, total - score],
+          backgroundColor: ['#4ecdc4', '#ff6b6b']
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+
+    const ctx2 = document.getElementById('perQuestionChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: perQuestion.map((_, i) => 'Q' + (i + 1)),
+        datasets: [{
+          label: 'Correct (1) / Incorrect (0)',
+          data: perQuestion,
+          backgroundColor: perQuestion.map(v => v ? '#4ecdc4' : '#ff6b6b')
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true, max: 1 } }
+      }
+    });
+  }
+</script>
+{% endblock %}

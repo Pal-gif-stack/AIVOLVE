@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page">
+  <h1>🔍 Concept Explorer</h1>
+
+  {% if summary %}
+    <p class="subtitle">Key terms extracted from your latest summary.</p>
+
+    <div class="chips">
+      {% for c in concepts %}
+      <span class="chip">{{ c.term }} <small>×{{ c.count }}</small></span>
+      {% endfor %}
+    </div>
+
+    <h3 style="margin-top:24px;">Current Summary</h3>
+    <p class="output">{{ summary }}</p>
+  {% else %}
+    <p>No summary found. Go to the Summarizer and create one first.</p>
+  {% endif %}
+</div>
+{% endblock %}

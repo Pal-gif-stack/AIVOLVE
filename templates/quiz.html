@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>Quiz Lab</h1>
+  <p>Answer questions generated from your latest summary.</p>
+</div>
+
+{% if quiz and quiz|length > 0 %}
+<div id="quizContainer" class="quiz-list">
+  {% for q in quiz %}
+  <div class="quiz-card">
+    <div class="quiz-header">
+      <span class="quiz-number">Q{{ loop.index }}</span>
+      <p class="quiz-question">{{ q.question }}</p>
+    </div>
+
+    <div class="quiz-body">
+      {% if q.type == 'mcq' %}
+      <div class="options">
+        {% for opt in q.options %}
+        <label class="option-chip">
+          <input type="radio" name="q{{ loop.index0 }}" value="{{ loop.index0 }}">
+          <span class="dot"></span>
+          <span>{{ opt }}</span>
+        </label>
+        {% endfor %}
+      </div>
+      {% elif q.type == 'short' %}
+      <textarea class="short-answer" placeholder="Type your answer here..."></textarea>
+      {% else %}
+      <p>{{ q.question }}</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="quiz-actions">
+  <button class="btn primary" onclick="submitQuiz()">📊 Submit & View Feedback</button>
+</div>
+{% else %}
+<p>No quiz available. Go to the summarizer first.</p>
+{% endif %}
+{% endblock %}

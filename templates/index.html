@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero">
+  <div class="hero-main">
+    <h1>Study smarter with <span>AI-powered</span> notes.</h1>
+    <p>Paste your raw notes or articles and turn them into clean summaries, quizzes, and learning insights in seconds.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('summarize_page') }}" class="btn primary">Start with Summarizer</a>
+      <a href="{{ url_for('history_page') }}" class="btn ghost">View past sessions</a>
+    </div>
+    <div class="hero-meta">
+      <span>⚡ Extractive NLP summarization</span>
+      <span>🧪 Auto-generated quizzes</span>
+      <span>📊 Feedback & charts</span>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="stat-card">
+      <h3>Live Session</h3>
+      <p>Paste notes → summarize → quiz in under 1 minute.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-pill">
+        <span class="label">Summary length</span>
+        <span class="value">Smart & concise</span>
+      </div>
+      <div class="stat-pill">
+        <span class="label">Question types</span>
+        <span class="value">MCQ + short answer</span>
+      </div>
+      <div class="stat-pill">
+        <span class="label">Powered by</span>
+        <span class="value">NLP</span>
+      </div>
+      <div class="stat-pill">
+        <span class="label">Created by</span>
+        <span class="value">Pallavi-Pari-Kajal</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feature-row">
+  <div class="feature-card">
+    <h2>📝 Smart Summarizer</h2>
+    <p>Frequency-based, extractive summaries with multiple modes: paragraph, bullets, and outline.</p>
+  </div>
+  <div class="feature-card">
+    <h2>❓ Quiz Lab</h2>
+    <p>Automatic MCQs and short-answer questions generated from your own content.</p>
+  </div>
+  <div class="feature-card">
+    <h2>📊 Feedback Dashboard</h2>
+    <p>See your score, per-question accuracy, and weak topics at a glance.</p>
+  </div>
+</div>
+{% endblock %}
