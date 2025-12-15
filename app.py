@@ -12,6 +12,7 @@ import random
 import re
 import sqlite3
 from pathlib import Path
+nltk.download('stopwords')
 
 app = Flask(__name__)
 app.secret_key = 'ai-studyhub-2025'
