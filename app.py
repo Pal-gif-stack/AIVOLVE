@@ -13,6 +13,8 @@ import re
 import sqlite3
 from pathlib import Path
 nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 app = Flask(__name__)
 app.secret_key = 'ai-studyhub-2025'
